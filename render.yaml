@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: littlesteps
+    runtime: node
+    plan: starter
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /login
+    disk:
+      name: littlesteps-data
+      mountPath: /opt/render/project/src/.littlesteps
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: 24.14.0
+      - key: LITTLESTEPS_AUTH_DB
+        value: /opt/render/project/src/.littlesteps/accounts.sqlite
